@@ -44,5 +44,5 @@ receving rtp audio and local Mic, mixing them and stream them to multiple destin
 
 receiving rtp mulaw format and mix it with Mic, play on speaker:
     
-    gst-launch-1.0 audiomixer name=mix ! audioconvert ! autoaudiosink autoaudiosrc ! audioconvert ! mix. queue udpsrc port=5001 caps="application/x-rtp" ! rtppcmudepay ! mulawdec ! queue ! audioconvert ! audioresample ! mix.
+    gst-launch-1.0 audiomixer name=mix ! autoaudiosink autoaudiosrc ! audioconvert ! mix. queue udpsrc port=5001 caps="application/x-rtp" ! rtppcmudepay ! mulawdec ! queue ! audioconvert ! audioresample ! mix.
     
