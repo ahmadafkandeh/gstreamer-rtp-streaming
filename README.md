@@ -51,4 +51,5 @@ the code above with tee, for dynamic linking in c code:
     gst-launch-1.0 audiomixer name=mix ! autoaudiosink tee name=t ! queue autoaudiosrc ! audioconvert ! mix. t. ! queue udpsrc port=5001 caps="application/x-rtp" ! queue ! rtppcmudepay ! mulawdec ! audioconvert ! audioresample ! mix.
     
 the code above without tee:
+
     gst-launch-1.0 audiomixer name=mix ! autoaudiosink autoaudiosrc ! audioconvert ! mix. udpsrc port=5001 caps="application/x-rtp" ! queue ! rtppcmudepay ! mulawdec ! audioconvert ! audioresample ! mix.
