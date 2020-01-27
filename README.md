@@ -1,7 +1,7 @@
 # gstreamer-rtp-streaming
 simple working with rtp and gstreaming
 
-for streaming audio:
+for streaming audio :
 
     gst-launch-1.0 autoaudiosrc ! audioconvert ! rtpL24pay ! udpsink host=<RECEIVER_IP> port=<PORT>
     
@@ -41,3 +41,8 @@ receving rtp audio and local Mic, mixing them and stream them to multiple destin
     udpsink host=<DESTINATION_IP_1> port=5000 t. ! queue ! udpsink host=<DESTINATION_IP_2> port=5000 t. ! queue \
     udpsrc port=5001 caps="application/x-rtp,channels=(int)2,format=(string)S16LE,media=(string)audio,payload=(int)96,clock-rate=(int)44100,encoding-name=(string)L24" !\
     queue ! rtpL24depay ! audioconvert ! mix.
+
+receiving rtp mulaw format and mix it with Mic, play on speaker:
+    
+    gst-launch-1.0 audiomixer name=mix ! audioconvert ! autoaudiosink autoaudiosrc ! audioconvert ! mix. queue udpsrc port=5001 caps="application/x-rtp" ! rtppcmudepay ! mulawdec ! queue ! audioconvert ! audioresample ! mix.
+    
