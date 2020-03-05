@@ -53,3 +53,9 @@ the code above with tee, for dynamic linking in c code:
 the code above without tee:
 
     gst-launch-1.0 audiomixer name=mix ! autoaudiosink autoaudiosrc ! audioconvert ! mix. udpsrc port=5001 caps="application/x-rtp" ! queue ! rtppcmudepay ! mulawdec ! audioconvert ! audioresample ! mix.
+    
+streaming and receiving audio with g722 rtp:
+
+    gst-launch-1.0 autoaudiosrc ! audioconvert ! audioresample ! avenc_g722 ! rtpg722pay ! udpsink host=<DESTINATION_IP> port=5000
+
+    gst-launch-1.0 udpsrc port=5000 aps="application/x-rtp" ! rtpg722depay ! avdec_g722 ! audioresample ! audioconvert ! autoaudiosink
